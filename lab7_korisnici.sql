@@ -28,7 +28,7 @@ prompt APPLICATION 101 - Korisnici
 -- Application Export:
 --   Application:     101
 --   Name:            Korisnici
---   Date and Time:   18:58 Sunday May 30, 2021
+--   Date and Time:   19:14 Sunday May 30, 2021
 --   Exported By:     VEDRAN
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -115,7 +115,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_01=>'APP_NAME'
 ,p_substitution_value_01=>'Korisnici'
 ,p_last_updated_by=>'VEDRAN'
-,p_last_upd_yyyymmddhh24miss=>'20210530185704'
+,p_last_upd_yyyymmddhh24miss=>'20210530191335'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>4
 ,p_ui_type_name => null
@@ -12936,7 +12936,7 @@ wwv_flow_api.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_last_updated_by=>'VEDRAN'
-,p_last_upd_yyyymmddhh24miss=>'20210530121858'
+,p_last_upd_yyyymmddhh24miss=>'20210530191335'
 );
 wwv_flow_api.create_report_region(
  p_id=>wwv_flow_api.id(11922471025576105)
@@ -13004,9 +13004,16 @@ unistr('  n.OPCINA as Op\0107ina,'),
 'from',
 '  NASELJA n, ZUPANIJE z',
 'where',
-'  n.IDZUPANIJA = z.ID'))
+'  n.IDZUPANIJA = z.ID',
+'order by MJESTO  ASC',
+''))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_display_condition_type=>'EXISTS'
+,p_plug_display_when_condition=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT COUNT(*) ',
+'FROM faks.studenti',
+'HAVING COUNT(*) > 5'))
 ,p_prn_content_disposition=>'ATTACHMENT'
 ,p_prn_document_header=>'APEX'
 ,p_prn_units=>'INCHES'
